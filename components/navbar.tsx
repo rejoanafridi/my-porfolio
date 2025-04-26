@@ -71,9 +71,7 @@ const Navbar = () => {
                         href="/"
                         className="text-xl font-bold tracking-tight hover:text-primary transition-colors"
                     >
-                        <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                            Portfolio
-                        </span>
+                        <span className="text-purple-500">Rejoan Islam</span>
                     </Link>
                 </motion.div>
 
