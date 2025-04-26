@@ -202,6 +202,28 @@ export default function HeroPage() {
                                     placeholder="e.g., Get in Touch"
                                 />
                             </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="ctaText">
+                                    Resume Button Text
+                                </Label>
+                                <Input
+                                    id="resumeBtnText"
+                                    name="resumeBtnText"
+                                    value={heroData.resumeBtnText}
+                                    onChange={handleChange}
+                                    placeholder="e.g., Resume"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="ctaText">Resume Link</Label>
+                                <Input
+                                    id="resumeLink"
+                                    name="resumeLink"
+                                    value={heroData.resumeLink}
+                                    onChange={handleChange}
+                                    placeholder="e.g., https://resume.com/afridi"
+                                />
+                            </div>
 
                             <div className="space-y-2">
                                 <Label htmlFor="secondaryCtaText">

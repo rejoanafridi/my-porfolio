@@ -8,7 +8,9 @@
     "subtitle": "Crafting Digital Experiences",
     "description": "Building elegant solutions to complex problems with clean, efficient code and a focus on user experience.",
     "ctaText": "Get in Touch",
-    "secondaryCtaText": "View Projects"
+    "secondaryCtaText": "View Projects",
+    "resumeBtnText": "Resume",
+    "resumeLink": "https://drive.google.com/file/d/1F7wbD-xjoGCiLZShwTi3V2ZXqQikFymg/view"
   },
   "about": {
     "id": "about",

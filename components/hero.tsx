@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import type { HeroSection } from '@/lib/types'
 import { getIconByName } from '@/lib/icon-map'
 import { useClient } from '@/hooks/useClient'
+import Link from 'next/link'
 
 interface HeroProps {
     data: HeroSection
@@ -181,6 +182,18 @@ const Hero = ({ data }: HeroProps) => {
                         transition={{ duration: 0.5, delay: 0.6 }}
                         className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
+                        <Link href={data.resumeLink ?? ''} target="_blank">
+                            <Button
+                                variant="outline"
+                                size="lg"
+                                className="rounded-full px-8 group relative overflow-hidden"
+                            >
+                                <span className="relative z-10">
+                                    {data.resumeBtnText}
+                                </span>
+                                <span className="absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </Button>
+                        </Link>
                         <Button
                             size="lg"
                             onClick={scrollToContact}
