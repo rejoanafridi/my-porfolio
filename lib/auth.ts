@@ -50,7 +50,7 @@ export async function loginUser(
     const token = await generateToken(user)
 
     // Set cookie
-    await cookies().set({
+    await (await cookies()).set({
         name: 'auth-token',
         value: token,
         httpOnly: true,

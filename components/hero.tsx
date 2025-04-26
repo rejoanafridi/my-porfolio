@@ -74,7 +74,6 @@ const Hero = ({ data }: HeroProps) => {
             {/* Custom cursor effect */}
             <motion.div
                 className="fixed top-0 left-0 w-8 h-8 rounded-full bg-primary z-50 pointer-events-none hidden md:block"
-                variants={variants}
                 animate={cursorVariant}
                 transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             />
