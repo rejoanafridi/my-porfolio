@@ -1,0 +1,265 @@
+{
+  "siteName": "Portfolio",
+  "siteDescription": "Professional portfolio website",
+  "hero": {
+    "id": "hero",
+    "title": "Software Engineer",
+    "name": "Rejoan Islam",
+    "subtitle": "Crafting Digital Experiences",
+    "description": "Building elegant solutions to complex problems with clean, efficient code and a focus on user experience.",
+    "ctaText": "Get in Touch",
+    "secondaryCtaText": "View Projects"
+  },
+  "about": {
+    "id": "about",
+    "title": "About Me",
+    "subtitle": "My Journey & Expertise",
+    "description": [
+      "I'm a passionate software engineer with over 3 years of experience building web applications and services. I specialize in JavaScript/TypeScript, React, Node.js, and cloud technologies.",
+      "My approach to software development focuses on creating clean, maintainable code that solves real-world problems. I'm constantly learning new technologies and methodologies to improve my craft.",
+      "When I'm not coding, you can find me hiking, reading tech blogs, or contributing to open-source projects. I believe in the power of technology to transform lives and businesses."
+    ],
+    "image": "https://rejoanislam.netlify.app/_ipx/w_384,q_75/%2Fheadshot.png?url=%2Fheadshot.png&w=384&q=75",
+    "traits": [
+      {
+        "icon": "Code",
+        "text": "Clean Code"
+      },
+      {
+        "icon": "Lightbulb",
+        "text": "Problem Solver"
+      },
+      {
+        "icon": "Globe",
+        "text": "Web Expert"
+      },
+      {
+        "icon": "Rocket",
+        "text": "Fast Learner"
+      },
+      {
+        "icon": "Coffee",
+        "text": "Team Player"
+      }
+    ]
+  },
+  "skills": {
+    "id": "skills",
+    "title": "Skills",
+    "subtitle": "Technical Expertise",
+    "skills": [
+      {
+        "id": "js",
+        "name": "JavaScript",
+        "icon": "Code",
+        "color": "bg-yellow-500/10 text-yellow-500 dark:text-yellow-400"
+      },
+      {
+        "id": "ts",
+        "name": "TypeScript",
+        "icon": "Code",
+        "color": "bg-blue-500/10 text-blue-500 dark:text-blue-400"
+      },
+      {
+        "id": "react",
+        "name": "React",
+        "icon": "Code",
+        "color": "bg-cyan-500/10 text-cyan-500 dark:text-cyan-400"
+      },
+      {
+        "id": "nextjs",
+        "name": "Next.js",
+        "icon": "Globe",
+        "color": "bg-black/10 text-black dark:bg-white/10 dark:text-white"
+      },
+      {
+        "id": "nodejs",
+        "name": "Node.js",
+        "icon": "Server",
+        "color": "bg-green-500/10 text-green-500 dark:text-green-400"
+      },
+      {
+        "id": "python",
+        "name": "Python",
+        "icon": "Terminal",
+        "color": "bg-yellow-600/10 text-yellow-600 dark:text-yellow-500"
+      },
+      {
+        "id": "sql",
+        "name": "SQL",
+        "icon": "Database",
+        "color": "bg-orange-500/10 text-orange-500 dark:text-orange-400"
+      },
+      {
+        "id": "graphql",
+        "name": "GraphQL",
+        "icon": "Database",
+        "color": "bg-pink-500/10 text-pink-500 dark:text-pink-400"
+      },
+      {
+        "id": "git",
+        "name": "Git",
+        "icon": "GitBranch",
+        "color": "bg-red-500/10 text-red-500 dark:text-red-400"
+      },
+      {
+        "id": "docker",
+        "name": "Docker",
+        "icon": "Layers",
+        "color": "bg-blue-600/10 text-blue-600 dark:text-blue-500"
+      },
+      {
+        "id": "aws",
+        "name": "AWS",
+        "icon": "Cloud",
+        "color": "bg-orange-600/10 text-orange-600 dark:text-orange-500"
+      },
+      {
+        "id": "skill-1745683280283",
+        "name": "Perfomance Optimization",
+        "icon": "Code",
+        "color": "bg-primary/10 text-primary"
+      },
+      {
+        "id": "skill-1745683493027",
+        "name": "Go",
+        "icon": "Code",
+        "color": "bg-primary/10 text-primary"
+      }
+    ]
+  },
+  "projects": {
+    "id": "projects",
+    "title": "Projects",
+    "subtitle": "Featured Work",
+    "projects": [
+      {
+        "id": "ecommerce",
+        "title": "E-Commerce Platform",
+        "description": "A full-featured e-commerce platform with product listings, cart functionality, and payment processing.",
+        "image": "/placeholder.svg?height=200&width=400",
+        "techStack": [
+          {
+            "name": "React",
+            "icon": "Code"
+          },
+          {
+            "name": "Node.js",
+            "icon": "Server"
+          },
+          {
+            "name": "MongoDB",
+            "icon": "Database"
+          },
+          {
+            "name": "Stripe",
+            "icon": "CreditCard"
+          }
+        ],
+        "demoLink": "https://example.com",
+        "githubLink": "https://github.com",
+        "featured": true
+      },
+      {
+        "id": "task-manager",
+        "title": "Task Management App",
+        "description": "A collaborative task management application with real-time updates and team workspaces.",
+        "image": "/placeholder.svg?height=200&width=400",
+        "techStack": [
+          {
+            "name": "Next.js",
+            "icon": "Globe"
+          },
+          {
+            "name": "TypeScript",
+            "icon": "Code"
+          },
+          {
+            "name": "Prisma",
+            "icon": "Database"
+          },
+          {
+            "name": "PostgreSQL",
+            "icon": "Database"
+          }
+        ],
+        "demoLink": "https://example.com",
+        "githubLink": "https://github.com",
+        "featured": true
+      },
+      {
+        "id": "weather-dashboard",
+        "title": "Weather Dashboard",
+        "description": "A weather dashboard that displays current conditions and forecasts for multiple locations.",
+        "image": "/placeholder.svg?height=200&width=400",
+        "techStack": [
+          {
+            "name": "React",
+            "icon": "Code"
+          },
+          {
+            "name": "Redux",
+            "icon": "Code"
+          },
+          {
+            "name": "Weather API",
+            "icon": "Cloud"
+          },
+          {
+            "name": "Chart.js",
+            "icon": "BarChart"
+          }
+        ],
+        "demoLink": "https://example.com",
+        "githubLink": "https://github.com",
+        "featured": true
+      },
+      {
+        "id": "finance-tracker",
+        "title": "Personal Finance Tracker",
+        "description": "An application to track expenses, income, and financial goals with visualization tools.",
+        "image": "/placeholder.svg?height=200&width=400",
+        "techStack": [
+          {
+            "name": "Vue.js",
+            "icon": "Code"
+          },
+          {
+            "name": "Firebase",
+            "icon": "Database"
+          },
+          {
+            "name": "D3.js",
+            "icon": "PieChart"
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": "Palette"
+          }
+        ],
+        "demoLink": "https://example.com",
+        "githubLink": "https://github.com",
+        "featured": true
+      }
+    ]
+  },
+  "contact": {
+    "id": "contact",
+    "title": "Contact",
+    "subtitle": "Get In Touch",
+    "email": "contact@example.com",
+    "location": "San Francisco, CA",
+    "socials": [
+      {
+        "platform": "GitHub",
+        "url": "https://github.com/rejoanafridi",
+        "icon": "Github"
+      },
+      {
+        "platform": "LinkedIn",
+        "url": "https://linkedin.com/in/rejoan-islam",
+        "icon": "Linkedin"
+      }
+    ]
+  }
+}
