@@ -94,12 +94,30 @@ async function getSiteData(): Promise<SiteConfig> {
         const result = await sql`SELECT COUNT(*) FROM hero_section`
         if (Number(result[0]?.count) > 0) {
             // If PostgreSQL has data, use the db-postgres implementation
-            const [hero, about, skills, projects, contact] = await Promise.all([
-                sql`SELECT * FROM hero_section LIMIT 1`,
-                sql`SELECT * FROM about_section LIMIT 1`,
+            const [
+                hero,
+                about,
+                about_paragraphs,
+                skills_section,
+                skills,
+                projects,
+                project_section,
+                contact,
+                about_traits,
+                project_tech_stack,
+                contact_socials
+            ] = await Promise.all([
+                sql`SELECT * FROM hero_section`,
+                sql`SELECT * FROM about_section`,
+                sql`SELECT * FROM about_paragraphs`,
                 sql`SELECT * FROM skills_section LIMIT 1`,
-                sql`SELECT * FROM projects_section LIMIT 1`,
-                sql`SELECT * FROM contact_section LIMIT 1`
+                sql`SELECT * FROM skills`,
+                sql`SELECT * FROM projects`,
+                sql`SELECT * FROM projects_section`,
+                sql`SELECT * FROM contact_section LIMIT 1`,
+                sql`SELECT * FROM about_traits LIMIT 1`,
+                sql`SELECT id, project_id, name, icon  FROM project_tech_stack`,
+                sql`SELECT platform, url, icon  FROM contact_socials`
             ])
 
             // Check if we have all the required data
@@ -129,13 +147,68 @@ async function getSiteData(): Promise<SiteConfig> {
                             heroData.resume_button_text || 'Resume',
                         resumeLink: heroData.resume_link || ''
                     },
-                    // For a complete implementation, you would need to build the full object
-                    // with all nested data like paragraphs, traits, skills, projects, etc.
-                    // This is just a simplified version
-                    about: getDefaultSiteData().about,
-                    skills: getDefaultSiteData().skills,
-                    projects: getDefaultSiteData().projects,
-                    contact: getDefaultSiteData().contact
+                    about: {
+                        id: about[0]?.id || '',
+                        title: about[0]?.title || '',
+                        subtitle: about[0]?.subtitle || '',
+                        image: about[0]?.image || '',
+                        traits: about_traits.map((trait: any) => ({
+                            icon: trait.icon,
+                            text: trait.text
+                        })),
+                        description: about_paragraphs.map(
+                            (desc) => desc.paragraph
+                        )
+                    },
+                    skills: {
+                        id: skills_section[0].id,
+                        title: skills_section[0].title,
+                        subtitle: skills_section[0].subtitle,
+                        skills: skills.map((s) => {
+                            return {
+                                id: s?.id,
+                                name: s?.name,
+                                icon: s?.icon,
+                                color: s?.color
+                            }
+                        })
+                    },
+                    projects: {
+                        id: project_section[0].id,
+                        title: project_section[0].title,
+                        subtitle: project_section[0].subtitle,
+                        projects: projects.map((p) => {
+                            return {
+                                id: p.id,
+                                title: p.title,
+                                description: p.description,
+                                image: p.image,
+                                techStack: project_tech_stack
+                                    .filter((pts) => pts.project_id === p.id)
+                                    .map((pts) => ({
+                                        icon: pts.icon,
+                                        name: pts.name
+                                    })),
+                                demoLink: p.demoLink,
+                                githubLink: p.github_link,
+                                featured: p.featured
+                            }
+                        })
+                    },
+                    contact: {
+                        id: contact[0].id,
+                        title: contact[0].title,
+                        email: contact[0].email,
+                        subtitle: contact[0].subtitle,
+                        location: contact[0].location,
+                        socials: contact_socials.map((sc) => {
+                            return {
+                                platform: sc.platform,
+                                url: sc.url,
+                                icon: sc.icon
+                            }
+                        })
+                    }
                 }
             }
         }
