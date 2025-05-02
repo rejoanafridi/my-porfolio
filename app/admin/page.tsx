@@ -9,7 +9,7 @@ import { getSiteData } from '@/lib/db-postgres'
 import Link from 'next/link'
 import { ArrowRight, Settings, Layout } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { ToastTest } from '@/components/toast-test'
+import {} from '@/components/toast-test'
 
 export default async function AdminDashboard() {
     const siteData = await getSiteData()
@@ -32,7 +32,7 @@ export default async function AdminDashboard() {
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-center md:justify-between flex-wrap  items-center mb-8">
                 <h1 className="text-3xl font-bold">Admin Dashboard</h1>
                 <div className="flex gap-4">
                     <Link href="/admin/settings">
@@ -57,12 +57,12 @@ export default async function AdminDashboard() {
             </div>
 
             {/* Toast testing section */}
-            <div className="mb-8 p-4 border rounded-lg">
+            {/* <div className="mb-8 p-4 border rounded-lg">
                 <h2 className="text-lg font-medium mb-3">
                     Toast Notification Test
                 </h2>
                 <ToastTest />
-            </div>
+            </div> */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sections.map((section) => (

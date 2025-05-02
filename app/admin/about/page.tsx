@@ -64,10 +64,6 @@ const TraitItem = memo(
             [index, onTraitChange]
         )
 
-        const handleRemove = useCallback(() => {
-            onRemoveTrait(index)
-        }, [index, onRemoveTrait])
-
         return (
             <div className="flex gap-2 items-center">
                 <div className="w-1/3">
@@ -90,7 +86,7 @@ const TraitItem = memo(
                     type="button"
                     variant="destructive"
                     size="icon"
-                    onClick={handleRemove}
+                    onClick={() => onRemoveTrait(index)}
                     disabled={disableRemove}
                 >
                     <Trash2 size={16} />
@@ -111,10 +107,6 @@ const ParagraphItem = memo(
             [index, onChange]
         )
 
-        const handleRemove = useCallback(() => {
-            onRemove(index)
-        }, [index, onRemove])
-
         return (
             <div className="flex gap-2">
                 <MemoizedTextarea
@@ -128,7 +120,7 @@ const ParagraphItem = memo(
                     type="button"
                     variant="destructive"
                     size="icon"
-                    onClick={handleRemove}
+                    onClick={() => onRemove(index)}
                     disabled={disableRemove}
                 >
                     <Trash2 size={16} />
@@ -216,7 +208,7 @@ export default function AboutPage() {
                 description: [...prev.description, '']
             }
         })
-    }, [setAboutData])
+    }, [aboutData, setAboutData])
 
     const removeDescriptionParagraph = useCallback(
         (index: number) => {
@@ -232,7 +224,7 @@ export default function AboutPage() {
                 }
             })
         },
-        [setAboutData]
+        [aboutData, setAboutData]
     )
 
     const handleTraitChange = useCallback(
@@ -252,7 +244,7 @@ export default function AboutPage() {
                 }
             })
         },
-        [setAboutData]
+        [aboutData, setAboutData]
     )
 
     const addTrait = useCallback(() => {
@@ -265,7 +257,7 @@ export default function AboutPage() {
                 traits: [...prev.traits, { icon: 'Code', text: '' }]
             }
         })
-    }, [setAboutData])
+    }, [aboutData, setAboutData])
 
     const removeTrait = useCallback(
         (index: number) => {
@@ -281,7 +273,7 @@ export default function AboutPage() {
                 }
             })
         },
-        [setAboutData]
+        [aboutData, setAboutData]
     )
 
     const handleSubmit = useCallback(
