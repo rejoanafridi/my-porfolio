@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+    * {
+        @apply transition-colors duration-200;
+    }
     :root {
         --background: 0 0% 100%;
         --foreground: 240 10% 3.9%;
@@ -10,7 +13,7 @@
         --card-foreground: 240 10% 3.9%;
         --popover: 0 0% 100%;
         --popover-foreground: 240 10% 3.9%;
-        --primary: 262.1 83.3% 47.8%;
+        --primary: 269 97% 55%; /* More vibrant purple */
         --primary-foreground: 0 0% 100%;
         --secondary: 240 4.8% 95.9%;
         --secondary-foreground: 240 5.9% 10%;
@@ -22,7 +25,7 @@
         --destructive-foreground: 0 0% 98%;
         --border: 240 5.9% 90%;
         --input: 240 5.9% 90%;
-        --ring: 262.1 83.3% 47.8%;
+        --ring: 269 97% 55%; /* Matching primary color */
         --radius: 0.5rem;
     }
 
@@ -33,7 +36,7 @@
         --card-foreground: 0 0% 98%;
         --popover: 240 10% 3.9%;
         --popover-foreground: 0 0% 98%;
-        --primary: 263.4 70% 60.4%;
+        --primary: 268 89% 65%; /* Slightly lighter purple for dark mode */
         --primary-foreground: 0 0% 100%;
         --secondary: 240 3.7% 15.9%;
         --secondary-foreground: 0 0% 98%;
@@ -45,17 +48,7 @@
         --destructive-foreground: 0 0% 98%;
         --border: 240 3.7% 15.9%;
         --input: 240 3.7% 15.9%;
-        --ring: 263.4 70% 60.4%;
-    }
-}
-
-@layer base {
-    * {
-        @apply border-border;
-    }
-    body {
-        @apply bg-background text-foreground;
-        font-feature-settings: 'rlig' 1, 'calt' 1;
+        --ring: 268 89% 65%; /* Matching dark primary */
     }
 }
 
