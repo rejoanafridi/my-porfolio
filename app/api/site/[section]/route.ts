@@ -90,6 +90,9 @@ export async function PUT(
         let result
 
         switch (section) {
+            case 'siteConfig':
+                result = await updateHeroSection(newSectionData)
+                break
             case 'hero':
                 result = await updateHeroSection(newSectionData)
                 break

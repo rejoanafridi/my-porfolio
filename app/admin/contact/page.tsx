@@ -217,7 +217,7 @@ export default function ContactPage() {
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-wrap justify-center md:justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">Edit Contact Section</h1>
                 <Button onClick={() => router.push('/admin')}>
                     Back to Dashboard

@@ -246,7 +246,7 @@ export default function SkillsPage() {
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-center flex-wrap md:justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">Edit Skills Section</h1>
                 <Button onClick={() => router.push('/admin')}>
                     Back to Dashboard

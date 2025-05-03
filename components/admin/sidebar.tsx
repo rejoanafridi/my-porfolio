@@ -73,7 +73,7 @@ const AdminSidebar = () => {
     return (
         <>
             {/* Mobile menu toggle */}
-            <div className="md:hidden fixed top-4 left-4 z-50">
+            <div className="md:hidden fixed top-0 left-0 z-50">
                 <Button
                     variant="outline"
                     size="icon"
@@ -92,7 +92,7 @@ const AdminSidebar = () => {
                 }`}
             >
                 <div className="flex flex-col h-full">
-                    <div className="p-4 border-b">
+                    <div className="px-4 py-2 md:px-4 md:py-4 border-b ml-8 md:ml-0">
                         <h2 className="text-xl font-bold">Admin Panel</h2>
                     </div>
 
