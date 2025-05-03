@@ -88,6 +88,7 @@ async function createTables() {
     )
   `
 
+  
     // Create about_traits table
     await sql`
     CREATE TABLE IF NOT EXISTS about_traits (
@@ -108,6 +109,7 @@ async function createTables() {
       subtitle VARCHAR(255) NOT NULL
     )
   `
+
 
     // Create skills table
     await sql`
@@ -182,4 +184,14 @@ async function createTables() {
       FOREIGN KEY (contact_id) REFERENCES contact_section(id) ON DELETE CASCADE
     )
   `
+
+await sql`
+CREATE TABLE IF NOT EXISTS site_config (
+    id VARCHAR(50) PRIMARY KEY DEFAULT 'default',
+    config JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);`
+
+
 }

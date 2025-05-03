@@ -1,8 +1,7 @@
 'use client'
-
 import { Suspense, useRef } from 'react'
 import LoadingSpinner from '@/components/ui/loading-spinner'
-import type { SiteConfig } from '@/lib/types'
+import type {} from '@/lib/types'
 import MinimalNavbar from '@/components/minimal/navbar'
 import MinimalHero from '@/components/minimal/hero'
 import MinimalAbout from '@/components/minimal/about'
@@ -11,12 +10,10 @@ import MinimalProjects from '@/components/minimal/projects'
 import MinimalContact from '@/components/minimal/contact'
 import MinimalFooter from '@/components/minimal/footer'
 import { useScroll, motion } from 'framer-motion'
+import { useLayout } from '@/contexts/layout-context'
 
-interface MinimalLayoutProps {
-    siteData: SiteConfig
-}
-
-export default function MinimalLayout({ siteData }: MinimalLayoutProps) {
+export default function MinimalLayout() {
+    const { siteData } = useLayout()
     const containerRef = useRef(null)
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -42,7 +39,7 @@ export default function MinimalLayout({ siteData }: MinimalLayoutProps) {
                     <MinimalSkills data={siteData.skills} />
                     <MinimalProjects data={siteData.projects} />
                     <MinimalContact data={siteData.contact} />
-                    <MinimalFooter name={siteData.hero.name} />
+                    <MinimalFooter  />
                 </div>
             </Suspense>
         </div>

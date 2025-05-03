@@ -1,15 +1,17 @@
 'use client'
-
+import { useLayout } from '@/contexts/layout-context'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter, Heart } from 'lucide-react'
+import { Github, Linkedin, Twitter } from 'lucide-react'
 
 interface FooterProps {
     themeVariant?: string
-    name?: string
 }
 
-const Footer = ({ themeVariant = 'default', name }: FooterProps) => {
+const Footer = ({ themeVariant = 'default' }: FooterProps) => {
+    const { siteConfig } = useLayout()
     const currentYear = new Date().getFullYear()
+
+    const { copyrightText, footerText } = siteConfig?.config ?? {}
 
     // Theme-specific footer styles
     const getFooterStyles = () => {
@@ -34,8 +36,7 @@ const Footer = ({ themeVariant = 'default', name }: FooterProps) => {
                         className="mb-4 md:mb-0"
                     >
                         <p className="text-sm text-muted-foreground flex items-center">
-                            &copy; {currentYear} {name} Made with{' '}
-                            <Heart size={14} className="mx-1 text-red-500" />{' '}
+                            &copy; {currentYear} {copyrightText} {footerText}
                         </p>
                     </motion.div>
 

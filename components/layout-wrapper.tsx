@@ -1,9 +1,8 @@
 'use client'
-
 import { useLayout } from '@/contexts/layout-context'
 import { Suspense, lazy } from 'react'
 import LoadingSpinner from '@/components/ui/loading-spinner'
-import type { SiteConfig } from '@/lib/types'
+import type {  } from '@/lib/types'
 import useClient from '@/hooks/use-client'
 
 // Lazy load layouts for better performance
@@ -11,11 +10,7 @@ const DefaultLayout = lazy(() => import('@/layouts/default-layout'))
 const CreativeLayout = lazy(() => import('@/layouts/creative-layout'))
 const MinimalLayout = lazy(() => import('@/layouts/minimal-layout'))
 
-interface LayoutWrapperProps {
-    siteData: SiteConfig
-}
-
-export default function LayoutWrapper({ siteData }: LayoutWrapperProps) {
+export default function LayoutWrapper() {
     const isClient = useClient()
     const { layoutVariant } = useLayout()
 
@@ -26,15 +21,9 @@ export default function LayoutWrapper({ siteData }: LayoutWrapperProps) {
 
     return (
         <Suspense fallback={<LoadingSpinner />}>
-            {layoutVariant === 'creative' && (
-                <CreativeLayout siteData={siteData} />
-            )}
-            {layoutVariant === 'minimal' && (
-                <MinimalLayout siteData={siteData} />
-            )}
-            {layoutVariant === 'default' && (
-                <DefaultLayout siteData={siteData} />
-            )}
+            {layoutVariant === 'creative' && <CreativeLayout />}
+            {layoutVariant === 'minimal' && <MinimalLayout />}
+            {layoutVariant === 'default' && <DefaultLayout />}
         </Suspense>
     )
 }

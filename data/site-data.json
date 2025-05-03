@@ -4,45 +4,28 @@
   "hero": {
     "id": "hero",
     "title": "Software Engineer",
-    "name": "John Doe",
-    "subtitle": "Crafting Digital Experiences",
-    "description": "Building elegant solutions to complex problems with clean, efficient code and a focus on user experience.",
+    "name": "Rejoan Islam",
+    "subtitle": "Building Scalable, Performant, and Beautiful Web Applications",
+    "description": "Hello! I'm Rejoan Islam, a Full Stack Developer who enjoys turning complex problems into simple, beautiful solutions.\nI specialize in React.js and Next.js for frontend development and build powerful server-side applications with Node.js.\nCurrently, I’m expanding my skills with Golang, pushing myself to create even faster and more scalable backend systems.\nI’m passionate about learning, growing, and collaborating with others to build products that make a difference.\nIf you’re looking for someone who is committed, curious, and cares deeply about quality — I’d love to work together!",
     "ctaText": "Get in Touch",
     "secondaryCtaText": "View Projects",
     "resumeButtonText": "Resume",
-    "resumeLink": ""
+    "resumeLink": "https://drive.google.com/file/d/1F7wbD-xjoGCiLZShwTi3V2ZXqQikFymg/view"
   },
   "about": {
     "id": "about",
     "title": "About Me",
     "subtitle": "My Journey & Expertise",
-    "description": [
-      "I'm a passionate software engineer with over 3 years of experience building web applications and services. I specialize in JavaScript/TypeScript, React, Node.js, and cloud technologies.",
-      "My approach to software development focuses on creating clean, maintainable code that solves real-world problems. I'm constantly learning new technologies and methodologies to improve my craft.",
-      "When I'm not coding, you can find me hiking, reading tech blogs, or contributing to open-source projects. I believe in the power of technology to transform lives and businesses."
-    ],
-    "image": "/placeholder.svg?height=256&width=256",
+    "image": "https://rejoanislam.netlify.app/_ipx/w_384,q_75/%2Fheadshot.png?url=%2Fheadshot.png&w=384&q=75",
     "traits": [
       {
         "icon": "Code",
         "text": "Clean Code"
-      },
-      {
-        "icon": "Lightbulb",
-        "text": "Problem Solver"
-      },
-      {
-        "icon": "Globe",
-        "text": "Web Expert"
-      },
-      {
-        "icon": "Rocket",
-        "text": "Fast Learner"
-      },
-      {
-        "icon": "Coffee",
-        "text": "Team Player"
       }
+    ],
+    "description": [
+      "I'm a passionate software engineer with over 3 years of experience building web applications and services. I specialize in JavaScript/TypeScript, React, Node.js, and cloud technologies.",
+      "My approach to software development focuses on creating clean, maintainable code that solves real-world problems. I'm constantly learning new technologies and methodologies to improve my craft."
     ]
   },
   "skills": {
@@ -93,12 +76,6 @@
         "color": "bg-orange-500/10 text-orange-500 dark:text-orange-400"
       },
       {
-        "id": "graphql",
-        "name": "GraphQL",
-        "icon": "Database",
-        "color": "bg-pink-500/10 text-pink-500 dark:text-pink-400"
-      },
-      {
         "id": "git",
         "name": "Git",
         "icon": "GitBranch",
@@ -121,6 +98,12 @@
         "name": "UI/UX",
         "icon": "Figma",
         "color": "bg-purple-500/10 text-purple-500 dark:text-purple-400"
+      },
+      {
+        "id": "skill-1745761711627",
+        "name": "Go",
+        "icon": "Code",
+        "color": "bg-primary/10 text-primary"
       }
     ]
   },
@@ -131,28 +114,27 @@
     "projects": [
       {
         "id": "ecommerce",
-        "title": "E-Commerce Platform",
+        "title": "E-Commerce Platform Cart24",
         "description": "A full-featured e-commerce platform with product listings, cart functionality, and payment processing.",
         "image": "/placeholder.svg?height=200&width=400",
         "techStack": [
           {
-            "name": "React",
-            "icon": "Code"
+            "icon": "Code",
+            "name": "React"
           },
           {
-            "name": "Node.js",
-            "icon": "Server"
+            "icon": "Server",
+            "name": "Node.js"
           },
           {
-            "name": "MongoDB",
-            "icon": "Database"
+            "icon": "Database",
+            "name": "MongoDB"
           },
           {
-            "name": "Stripe",
-            "icon": "CreditCard"
+            "icon": "CreditCard",
+            "name": "Stripe"
           }
         ],
-        "demoLink": "https://example.com",
         "githubLink": "https://github.com",
         "featured": true
       },
@@ -163,23 +145,22 @@
         "image": "/placeholder.svg?height=200&width=400",
         "techStack": [
           {
-            "name": "Next.js",
-            "icon": "Globe"
+            "icon": "Globe",
+            "name": "Next.js"
           },
           {
-            "name": "TypeScript",
-            "icon": "Code"
+            "icon": "Code",
+            "name": "TypeScript"
           },
           {
-            "name": "Prisma",
-            "icon": "Database"
+            "icon": "Database",
+            "name": "Prisma"
           },
           {
-            "name": "PostgreSQL",
-            "icon": "Database"
+            "icon": "Database",
+            "name": "PostgreSQL"
           }
         ],
-        "demoLink": "https://example.com",
         "githubLink": "https://github.com",
         "featured": true
       },
@@ -190,23 +171,22 @@
         "image": "/placeholder.svg?height=200&width=400",
         "techStack": [
           {
-            "name": "React",
-            "icon": "Code"
+            "icon": "Code",
+            "name": "React"
           },
           {
-            "name": "Redux",
-            "icon": "Code"
+            "icon": "Code",
+            "name": "Redux"
           },
           {
-            "name": "Weather API",
-            "icon": "Cloud"
+            "icon": "Cloud",
+            "name": "Weather API"
           },
           {
-            "name": "Chart.js",
-            "icon": "BarChart"
+            "icon": "BarChart",
+            "name": "Chart.js"
           }
         ],
-        "demoLink": "https://example.com",
         "githubLink": "https://github.com",
         "featured": true
       },
@@ -217,23 +197,22 @@
         "image": "/placeholder.svg?height=200&width=400",
         "techStack": [
           {
-            "name": "Vue.js",
-            "icon": "Code"
+            "icon": "Code",
+            "name": "Vue.js"
           },
           {
-            "name": "Firebase",
-            "icon": "Database"
+            "icon": "Database",
+            "name": "Firebase"
           },
           {
-            "name": "D3.js",
-            "icon": "PieChart"
+            "icon": "PieChart",
+            "name": "D3.js"
           },
           {
-            "name": "Tailwind CSS",
-            "icon": "Palette"
+            "icon": "Palette",
+            "name": "Tailwind CSS"
           }
         ],
-        "demoLink": "https://example.com",
         "githubLink": "https://github.com",
         "featured": true
       }
@@ -242,8 +221,8 @@
   "contact": {
     "id": "contact",
     "title": "Contact",
+    "email": "rejoanislam.cse@gmail.com",
     "subtitle": "Get In Touch",
-    "email": "contact@example.com",
     "location": "San Francisco, CA",
     "socials": [
       {
@@ -262,5 +241,6 @@
         "icon": "Twitter"
       }
     ]
-  }
+  },
+  "copyrightText": "update"
 }

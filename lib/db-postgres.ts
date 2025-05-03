@@ -1,4 +1,57 @@
+import { Pool } from 'pg'
 import { sql } from './db-client'
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL
+})
+
+// Site configuration functions
+export async function getSiteConfig() {
+    try {
+        const { rows } = await pool.query('SELECT * FROM site_config LIMIT 1')
+        return rows[0] || null
+    } catch (error) {
+        if (error instanceof Error && error.message.includes('relation "site_config" does not exist')) {
+            // Create table if it doesn't exist
+            await pool.query(`
+                CREATE TABLE IF NOT EXISTS site_config (
+                    id VARCHAR(50) PRIMARY KEY DEFAULT 'default',
+                    config JSONB NOT NULL DEFAULT '{}'::jsonb,
+                    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+                );
+                INSERT INTO site_config (id, config)
+                VALUES ('default', '{"siteName":"My Portfolio","siteDescription":"Personal portfolio website"}')
+                ON CONFLICT (id) DO NOTHING;
+            `);
+            const { rows } = await pool.query('SELECT * FROM site_config LIMIT 1');
+            return rows[0] || null;
+        }
+        console.error('Error getting site config:', error);
+        return null;
+    }
+}
+
+export async function updateSiteConfig(newConfig: any) {
+    try {
+        const { rows } = await pool.query(
+            'UPDATE site_config SET config = $1 RETURNING *',
+            [JSON.stringify(newConfig)]
+        )
+        return { 
+            success: true, 
+            data: rows[0] ? {
+                ...rows[0],
+                config: typeof rows[0].config === 'string' ? JSON.parse(rows[0].config) : rows[0].config
+            } : null
+        }
+    } catch (error) {
+        console.error('Error updating site config:', error)
+        return { 
+            success: false, 
+            error: error instanceof Error ? error.message : 'Failed to update site config'
+        }
+    }
+}
 import type {
     SiteConfig,
     HeroSection,

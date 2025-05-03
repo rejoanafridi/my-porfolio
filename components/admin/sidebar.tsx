@@ -13,7 +13,8 @@ import {
     Menu,
     X,
     Settings,
-    Layout
+    Layout,
+    Globe
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -49,6 +50,11 @@ const AdminSidebar = () => {
             name: 'Theme Settings',
             path: '/admin/settings',
             icon: <Settings size={18} />
+        },
+        {
+            name: 'Site Configuration',
+            path: '/admin/settings/site-config',
+            icon: <Globe size={18} />
         },
         {
             name: 'Layout Settings',
@@ -103,7 +109,7 @@ const AdminSidebar = () => {
                                 href={item.path}
                                 className={`flex items-center px-4 py-2 rounded-md transition-colors ${
                                     item.path === pathname
-                                        ? 'bg-purple-500 text-primary-foreground text-white'
+                                        ? 'bg-purple-700  text-white'
                                         : 'hover:bg-muted'
                                 }`}
                                 onClick={() => setIsMobileMenuOpen(false)}

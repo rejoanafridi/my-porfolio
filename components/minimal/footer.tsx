@@ -1,11 +1,13 @@
 'use client'
 
+import { useLayout } from '@/contexts/layout-context'
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Twitter } from 'lucide-react'
 
-const MinimalFooter = ({ name }: { name: string }) => {
+const MinimalFooter = () => {
+    const { siteConfig } = useLayout()
     const currentYear = new Date().getFullYear()
-
+    const { copyrightText, footerText } = siteConfig?.config ?? {}
     return (
         <footer className="py-12 border-t border-neutral-200 dark:border-neutral-800">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,7 +19,7 @@ const MinimalFooter = ({ name }: { name: string }) => {
                         className="mb-6 md:mb-0"
                     >
                         <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                            &copy; {currentYear} {name}. All rights reserved.
+                            &copy; {currentYear} {copyrightText} {footerText}
                         </p>
                     </motion.div>
 
