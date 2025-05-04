@@ -5,6 +5,13 @@ import Link from 'next/link'
 import { ModeToggle } from '../mode-toggle'
 import { motion } from 'framer-motion'
 import { useLayout } from '@/contexts/layout-context'
+import { useThemeVariant } from '@/contexts/theme-context'
+import {
+    getActiveBorder,
+    getActiveNavStyles,
+    getLogoStyles,
+    getNavHoverStyles
+} from '@/lib/utils'
 
 interface CreativeNavbarProps {
     currentSection: string
@@ -17,7 +24,7 @@ const CreativeNavbar = ({
 }: CreativeNavbarProps) => {
     const { siteConfig } = useLayout()
     const [isScrolled, setIsScrolled] = useState(false)
-
+    const { themeVariant } = useThemeVariant()
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10)
@@ -49,7 +56,9 @@ const CreativeNavbar = ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
-                        className="bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent"
+                        className={`bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent ${getLogoStyles(
+                            themeVariant
+                        )}`}
                     >
                         {siteConfig?.config?.siteName || 'Portfolio'}
                     </motion.span>
@@ -69,14 +78,20 @@ const CreativeNavbar = ({
                             onClick={() => onSectionChange(item.id)}
                             className={`relative text-sm font-medium transition-colors ${
                                 currentSection === item.id
-                                    ? 'text-amber-400'
-                                    : 'text-white hover:text-amber-400'
+                                    ? `text-amber-400 ${getActiveNavStyles(
+                                          themeVariant
+                                      )}`
+                                    : `text-white hover:text-amber-400  ${getNavHoverStyles(
+                                          themeVariant
+                                      )}`
                             }`}
                         >
                             {currentSection === item.id && (
                                 <motion.span
                                     layoutId="creativeActiveSection"
-                                    className="absolute -bottom-2 left-0 right-0 h-0.5 bg-amber-400"
+                                    className={`absolute -bottom-2 left-0 right-0 h-0.5 bg-amber-400 ${getActiveBorder(
+                                        themeVariant
+                                    )}`}
                                     transition={{
                                         type: 'spring',
                                         stiffness: 300,
@@ -139,9 +154,13 @@ const CreativeNavbar = ({
                                     .getElementById('mobile-menu')
                                     ?.classList.add('hidden')
                             }}
-                            className={`py-3 text-center text-lg font-medium ${
+                            className={`py-3 text-center text-lg font-medium  ${getNavHoverStyles(
+                                themeVariant
+                            )} ${
                                 currentSection === item.id
-                                    ? 'text-amber-400'
+                                    ? `text-amber-400 ${getActiveNavStyles(
+                                          themeVariant
+                                      )}`
                                     : 'text-white'
                             }`}
                         >

@@ -33,8 +33,7 @@ export default function SiteConfigPage() {
         faviconUrl: '',
         metaImage: '',
         footerText: '',
-        copyrightText: '',
-
+        copyrightText: ''
     })
 
     const fetchSiteData = async () => {

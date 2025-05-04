@@ -109,7 +109,7 @@ const AdminSidebar = () => {
                                 href={item.path}
                                 className={`flex items-center px-4 py-2 rounded-md transition-colors ${
                                     item.path === pathname
-                                        ? 'bg-purple-700  text-white'
+                                        ? 'bg-primary  text-white'
                                         : 'hover:bg-muted'
                                 }`}
                                 onClick={() => setIsMobileMenuOpen(false)}

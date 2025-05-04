@@ -2,7 +2,7 @@
 import { useLayout } from '@/contexts/layout-context'
 import { Suspense, lazy } from 'react'
 import LoadingSpinner from '@/components/ui/loading-spinner'
-import type {  } from '@/lib/types'
+import type {} from '@/lib/types'
 import useClient from '@/hooks/use-client'
 
 // Lazy load layouts for better performance

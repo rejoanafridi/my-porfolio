@@ -1,10 +1,8 @@
 'use client'
-
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
-
-import { cn, getDefaultColor } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import useClient from '@/hooks/use-client'
 
 const buttonVariants = cva(
@@ -12,9 +10,9 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                default: `bg-purple-700  text-white hover:bg-purple-700/90 `,
+                default: `bg-primary text-white hover:bg-primary/90 `,
                 destructive: `bg-destructive text-destructive-foreground hover:bg-destructive/90 `,
-                outline: `border border-purple-700 bg-gray-200 hover:bg-accent hover:text-accent-foreground `,
+                outline: `border border-primary bg-secondary hover:bg-muted hover:text-accent-foreground `,
                 secondary: `bg-secondary text-secondary-foreground hover:bg-secondary/80`,
                 ghost: 'hover:bg-accent hover:text-accent-foreground',
                 link: 'text-primary underline-offset-4 hover:underline'

@@ -7,6 +7,11 @@ import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useThemeVariant } from '@/contexts/theme-context'
 import useClient from '@/hooks/use-client'
+import {
+    getActiveNavStyles,
+    getLogoStyles,
+    getNavHoverStyles
+} from '@/lib/utils'
 
 const Navbar = ({ siteConfig }: any) => {
     const isClient = useClient()
@@ -55,43 +60,6 @@ const Navbar = ({ siteConfig }: any) => {
         { id: 'contact', label: 'Contact' }
     ]
 
-    // Get logo styles based on theme variant
-    const getLogoStyles = () => {
-        switch (themeVariant) {
-            case 'minimal':
-                return 'text-slate-900 dark:text-white font-serif'
-            case 'creative':
-                return 'bg-gradient-to-r from-amber-600 to-orange-600 dark:from-amber-400 dark:to-orange-500 bg-clip-text text-transparent font-bold'
-            default:
-                return 'bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent font-bold'
-        }
-    }
-
-    // Get active nav item styles based on theme variant
-    const getActiveNavStyles = () => {
-        switch (themeVariant) {
-            case 'minimal':
-                return 'text-slate-900 dark:text-white font-medium'
-            case 'creative':
-                return 'text-amber-600 dark:text-amber-400 font-medium'
-            default:
-                return 'text-violet-600 dark:text-violet-400 font-medium'
-        }
-    }
-
-    // Get hover styles for nav items
-    const getNavHoverStyles = () => {
-        switch (themeVariant) {
-            case 'minimal':
-                return 'hover:text-slate-900 dark:hover:text-white'
-            case 'creative':
-                return 'hover:text-amber-600 dark:hover:text-amber-400'
-            default:
-                return 'hover:text-violet-600 dark:hover:text-violet-400'
-        }
-    }
-
-
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -108,9 +76,11 @@ const Navbar = ({ siteConfig }: any) => {
                 >
                     <Link
                         href="/"
-                        className={`text-xl tracking-tight hover:opacity-80 transition-colors ${getLogoStyles()}`}
+                        className={`text-xl tracking-tight hover:opacity-80 transition-colors ${getLogoStyles(
+                            themeVariant
+                        )}`}
                     >
-                        {siteConfig?.config?.siteName || "Portfolio"}
+                        {siteConfig?.config?.siteName || 'Portfolio'}
                     </Link>
                 </motion.div>
 
@@ -127,8 +97,10 @@ const Navbar = ({ siteConfig }: any) => {
                             onClick={() => scrollToSection(item.id)}
                             className={`relative px-4 py-2 text-sm rounded-full transition-colors ${
                                 activeSection === item.id
-                                    ? getActiveNavStyles()
-                                    : `text-foreground/70 ${getNavHoverStyles()}`
+                                    ? getActiveNavStyles(themeVariant)
+                                    : `text-foreground/70 ${getNavHoverStyles(
+                                          themeVariant
+                                      )}`
                             }`}
                         >
                             {activeSection === item.id && (
@@ -179,8 +151,10 @@ const Navbar = ({ siteConfig }: any) => {
                                     onClick={() => scrollToSection(item.id)}
                                     className={`py-2 text-sm font-medium ${
                                         activeSection === item.id
-                                            ? getActiveNavStyles()
-                                            : `text-foreground/70 ${getNavHoverStyles()}`
+                                            ? getActiveNavStyles(themeVariant)
+                                            : `text-foreground/70 ${getNavHoverStyles(
+                                                  themeVariant
+                                              )}`
                                     } transition-colors`}
                                 >
                                     {item.label}

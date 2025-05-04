@@ -8,11 +8,11 @@ export interface SiteConfig {
     metaImage: string
     footerText: string
     copyrightText: string
-    socialLinks: {
-        platform: string
-        url: string
-        icon: string
-    }[]
+    // socialLinks: {
+    //     platform: string
+    //     url: string
+    //     icon: string
+    // }[]
 }
 
 export interface CloudinaryUploadResponse {
