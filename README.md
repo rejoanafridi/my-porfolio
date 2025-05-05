@@ -13,7 +13,7 @@ A customizable portfolio website with multiple layout options and an admin panel
 
 1. Clone the repository:
    \`\`\`bash
-   git clone https://github.com/yourusername/portfolio-website.git
+   git clone https://github.com/rejanafridi/my-porfolio.git
    cd portfolio-website
    \`\`\`
 
@@ -63,6 +63,3 @@ cp .env.example .env.local
 -   Shadcn UI Components
     \`\`\`
 
-## 2. Create a useClient Hook
-
-Let's create a custom hook to check if code is running on the client side:
