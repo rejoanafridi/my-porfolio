@@ -1,10 +1,10 @@
 'use client'
 import { useLayout } from '@/contexts/layout-context'
+import { getIconByName } from '@/lib/icon-map'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter} from 'lucide-react'
 
 const CreativeFooter = () => {
-    const { siteConfig } = useLayout()
+    const { siteConfig, siteData } = useLayout()
     const currentYear = new Date().getFullYear()
     const { copyrightText, footerText } = siteConfig?.config ?? {}
     return (
@@ -28,33 +28,18 @@ const CreativeFooter = () => {
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="flex space-x-4"
                     >
-                        <a
-                            href="https://github.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 transition-colors"
-                            aria-label="GitHub"
-                        >
-                            <Github size={18} />
-                        </a>
-                        <a
-                            href="https://linkedin.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 transition-colors"
-                            aria-label="LinkedIn"
-                        >
-                            <Linkedin size={18} />
-                        </a>
-                        <a
-                            href="https://twitter.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 transition-colors"
-                            aria-label="Twitter"
-                        >
-                            <Twitter size={18} />
-                        </a>
+                        {siteData?.contact?.socials?.map((social: any) => (
+                            <a
+                                key={social?.platform}
+                                href={social?.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 border border-amber-200 dark:border-amber-500 flex items-center justify-center text-amber-200 dark:text-white hover:bg-neutral-100 dark:hover:bg-amber-600 transition-colors"
+                                aria-label={social?.platform}
+                            >
+                                {getIconByName(social?.icon, 18)}
+                            </a>
+                        ))}
                     </motion.div>
                 </div>
             </div>

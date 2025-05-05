@@ -6,12 +6,14 @@ import type { ProjectsSection } from '@/lib/types'
 import { getIconByName } from '@/lib/icon-map'
 import { Button } from '@/components/ui/button'
 import { Github, ExternalLink } from 'lucide-react'
+import React from 'react'
 
 interface MinimalProjectsProps {
     data: ProjectsSection
 }
 
 const MinimalProjects = ({ data }: MinimalProjectsProps) => {
+    console.log(data)
     return (
         <section id="projects" className="py-24 md:py-32">
             <motion.div
@@ -51,91 +53,109 @@ const MinimalProjects = ({ data }: MinimalProjectsProps) => {
                 </div>
 
                 <div className="space-y-24">
-                    {data.projects.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{
-                                duration: 0.8,
-                                delay: 0.5 + index * 0.1
-                            }}
-                            className={`flex flex-col ${
-                                index % 2 === 0
-                                    ? 'md:flex-row'
-                                    : 'md:flex-row-reverse'
-                            } gap-8 md:gap-12 items-center`}
-                        >
-                            <div className="w-full md:w-1/2">
-                                <div className="relative aspect-video overflow-hidden">
-                                    <Image
-                                        src={
-                                            project.image || '/placeholder.svg'
-                                        }
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover hover:scale-105 transition-transform duration-500"
-                                    />
+                    {data.projects.map((project, index) => {
+                        const paragraphs = project?.description.split('\n\n')
+                        return (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 0.5 + index * 0.1
+                                }}
+                                className={`flex flex-col ${
+                                    index % 2 === 0
+                                        ? 'md:flex-row'
+                                        : 'md:flex-row-reverse'
+                                } gap-8 md:gap-12 items-center`}
+                            >
+                                <div className="w-full md:w-1/2">
+                                    <div className="relative aspect-video overflow-hidden">
+                                        <Image
+                                            src={
+                                                project.image ||
+                                                '/placeholder.svg'
+                                            }
+                                            alt={project.title}
+                                            fill
+                                            className="object-cover hover:scale-105 transition-transform duration-500"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="w-full md:w-1/2">
-                                <h3 className="text-2xl font-medium text-neutral-800 dark:text-neutral-200 mb-4">
-                                    {project.title}
-                                </h3>
-                                <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-                                    {project.description}
-                                </p>
+                                <div className="w-full md:w-1/2">
+                                    <h3 className="text-2xl font-medium text-neutral-800 dark:text-neutral-200 mb-4">
+                                        {project.title}
+                                    </h3>
+                                    <div className="text-neutral-600 dark:text-neutral-400 mb-6">
+                                        {paragraphs.map((para, i) => (
+                                            <p key={i}>
+                                                {para
+                                                    ?.split('\n')
+                                                    ?.map((line, j) => (
+                                                        <React.Fragment key={j}>
+                                                            {line}
+                                                            <br />
+                                                        </React.Fragment>
+                                                    ))}
+                                            </p>
+                                        ))}
+                                    </div>
 
-                                <div className="flex flex-wrap gap-3 mb-8">
-                                    {project.techStack.map(
-                                        (tech, techIndex) => (
-                                            <span
-                                                key={techIndex}
-                                                className="px-3 py-1 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 text-sm flex items-center gap-1"
+                                    <div className="flex flex-wrap gap-3 mb-8">
+                                        {project.techStack.map(
+                                            (tech, techIndex) => (
+                                                <span
+                                                    key={techIndex}
+                                                    className="px-3 py-1 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 text-sm flex items-center gap-1"
+                                                >
+                                                    {getIconByName(
+                                                        tech.icon,
+                                                        14
+                                                    )}
+                                                    <span>{tech.name}</span>
+                                                </span>
+                                            )
+                                        )}
+                                    </div>
+
+                                    <div className="flex gap-4">
+                                        <Button
+                                            variant="outline"
+                                            className="border-neutral-300 text-neutral-800 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-800 rounded-none"
+                                            asChild
+                                        >
+                                            <a
+                                                href={project.githubLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-2"
                                             >
-                                                {getIconByName(tech.icon, 14)}
-                                                <span>{tech.name}</span>
-                                            </span>
-                                        )
-                                    )}
-                                </div>
-
-                                <div className="flex gap-4">
-                                    <Button
-                                        variant="outline"
-                                        className="border-neutral-300 text-neutral-800 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-800 rounded-none"
-                                        asChild
-                                    >
-                                        <a
-                                            href={project.githubLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center gap-2"
+                                                <Github size={16} />
+                                                <span>View Code</span>
+                                            </a>
+                                        </Button>
+                                        <Button
+                                            className="bg-neutral-800 hover:bg-neutral-700 text-white dark:bg-neutral-200 dark:hover:bg-neutral-300 dark:text-neutral-800 rounded-none"
+                                            asChild
                                         >
-                                            <Github size={16} />
-                                            <span>View Code</span>
-                                        </a>
-                                    </Button>
-                                    <Button
-                                        className="bg-neutral-800 hover:bg-neutral-700 text-white dark:bg-neutral-200 dark:hover:bg-neutral-300 dark:text-neutral-800 rounded-none"
-                                        asChild
-                                    >
-                                        <a
-                                            href={project?.demoLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center gap-2"
-                                        >
-                                            <ExternalLink size={16} />
-                                            <span>Live Demo</span>
-                                        </a>
-                                    </Button>
+                                            <a
+                                                href={project?.demoLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-2"
+                                            >
+                                                <ExternalLink size={16} />
+                                                <span>Live Demo</span>
+                                            </a>
+                                        </Button>
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        )
+                    })}
                 </div>
             </motion.div>
         </section>

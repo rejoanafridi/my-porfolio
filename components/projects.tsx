@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
     Card,
     CardContent,
@@ -105,104 +105,123 @@ const Projects = ({ data }: ProjectsProps) => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {data.projects.map((project, index) => (
-                            <motion.div
-                                key={`${index}`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={
-                                    inView
-                                        ? { opacity: 1, y: 0 }
-                                        : { opacity: 0, y: 20 }
-                                }
-                                transition={{
-                                    duration: 0.5,
-                                    delay: 0.3 + index * 0.1
-                                }}
-                                onMouseEnter={() =>
-                                    setHoveredProject(project.id)
-                                }
-                                onMouseLeave={() => setHoveredProject(null)}
-                            >
-                                <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-border/50">
-                                    <div className="relative h-48 w-full overflow-hidden">
-                                        <Image
-                                            src={
-                                                project.image ||
-                                                '/placeholder.svg'
-                                            }
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover transition-transform duration-700 ease-in-out"
-                                            style={{
-                                                transform:
-                                                    hoveredProject ===
-                                                    project.id
-                                                        ? 'scale(1.05)'
-                                                        : 'scale(1)'
-                                            }}
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                                    </div>
-                                    <CardHeader>
-                                        <CardTitle className="text-xl font-bold">
-                                            {project.title}
-                                        </CardTitle>
-                                        <CardDescription className="text-sm">
-                                            {project.description}
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="flex flex-wrap gap-2 mt-2">
-                                            {project.techStack.map(
-                                                (tech, index) => (
-                                                    <span
-                                                        key={index}
-                                                        className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full flex items-center gap-1"
-                                                    >
-                                                        {getIconByName(
-                                                            tech.icon,
-                                                            14
-                                                        )}
-                                                        <span>{tech.name}</span>
-                                                    </span>
-                                                )
-                                            )}
+                        {data.projects.map((project, index) => {
+                            const paragraphs =
+                                project?.description.split('\n\n')
+                            return (
+                                <motion.div
+                                    key={`${index}`}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={
+                                        inView
+                                            ? { opacity: 1, y: 0 }
+                                            : { opacity: 0, y: 20 }
+                                    }
+                                    transition={{
+                                        duration: 0.5,
+                                        delay: 0.3 + index * 0.1
+                                    }}
+                                    onMouseEnter={() =>
+                                        setHoveredProject(project.id)
+                                    }
+                                    onMouseLeave={() => setHoveredProject(null)}
+                                >
+                                    <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-border/50">
+                                        <div className="relative h-48 w-full overflow-hidden">
+                                            <Image
+                                                src={
+                                                    project.image ||
+                                                    '/placeholder.svg'
+                                                }
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover transition-transform duration-700 ease-in-out"
+                                                style={{
+                                                    transform:
+                                                        hoveredProject ===
+                                                        project.id
+                                                            ? 'scale(1.05)'
+                                                            : 'scale(1)'
+                                                }}
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                                         </div>
-                                    </CardContent>
-                                    <CardFooter className="flex justify-between">
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            asChild
-                                        >
-                                            <a
-                                                href={project.githubLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex items-center gap-1"
+                                        <CardHeader>
+                                            <CardTitle className="text-xl font-bold">
+                                                {project.title}
+                                            </CardTitle>
+                                            <CardDescription className="text-sm">
+                                                {paragraphs.map((para, i) => (
+                                                    <p key={i}>
+                                                        {para
+                                                            ?.split('\n')
+                                                            ?.map((line, j) => (
+                                                                <React.Fragment
+                                                                    key={j}
+                                                                >
+                                                                    {line}
+                                                                    <br />
+                                                                </React.Fragment>
+                                                            ))}
+                                                    </p>
+                                                ))}
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <div className="flex flex-wrap gap-2 mt-2">
+                                                {project.techStack.map(
+                                                    (tech, index) => (
+                                                        <span
+                                                            key={index}
+                                                            className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full flex items-center gap-1"
+                                                        >
+                                                            {getIconByName(
+                                                                tech.icon,
+                                                                14
+                                                            )}
+                                                            <span>
+                                                                {tech.name}
+                                                            </span>
+                                                        </span>
+                                                    )
+                                                )}
+                                            </div>
+                                        </CardContent>
+                                        <CardFooter className="flex justify-between">
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                asChild
                                             >
-                                                <Github size={16} />
-                                                <span>Code</span>
-                                            </a>
-                                        </Button>
-                                        <Button size="sm" asChild>
-                                            <a
-                                                href={project.demoLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex items-center gap-1 group"
-                                            >
-                                                <span>Live Demo</span>
-                                                <ArrowRight
-                                                    size={16}
-                                                    className="transition-transform duration-300 group-hover:translate-x-1"
-                                                />
-                                            </a>
-                                        </Button>
-                                    </CardFooter>
-                                </Card>
-                            </motion.div>
-                        ))}
+                                                <a
+                                                    href={project.githubLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-1"
+                                                >
+                                                    <Github size={16} />
+                                                    <span>Code</span>
+                                                </a>
+                                            </Button>
+                                            <Button size="sm" asChild>
+                                                <a
+                                                    href={project.demoLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-1 group"
+                                                >
+                                                    <span>Live Demo</span>
+                                                    <ArrowRight
+                                                        size={16}
+                                                        className="transition-transform duration-300 group-hover:translate-x-1"
+                                                    />
+                                                </a>
+                                            </Button>
+                                        </CardFooter>
+                                    </Card>
+                                </motion.div>
+                            )
+                        })}
                     </div>
 
                     <motion.div

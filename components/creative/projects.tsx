@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import type { ProjectsSection } from '@/lib/types'
 import { getIconByName } from '@/lib/icon-map'
 import { Button } from '@/components/ui/button'
@@ -105,12 +105,26 @@ const CreativeProjects = ({ data }: CreativeProjectsProps) => {
                                     <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
                                         {data.projects[activeProject].title}
                                     </h3>
-                                    <p className="text-gray-300 mb-6">
-                                        {
-                                            data.projects[activeProject]
-                                                .description
-                                        }
-                                    </p>
+                                    <div className="text-gray-300 mb-6">
+                                        {data.projects[
+                                            activeProject
+                                        ]?.description
+                                            .split('\n\n')
+                                            .map((para, i) => (
+                                                <p key={i}>
+                                                    {para
+                                                        ?.split('\n')
+                                                        ?.map((line, j) => (
+                                                            <React.Fragment
+                                                                key={j}
+                                                            >
+                                                                {line}
+                                                                <br />
+                                                            </React.Fragment>
+                                                        ))}
+                                                </p>
+                                            ))}
+                                    </div>
 
                                     <div className="flex flex-wrap gap-3 mb-8">
                                         {data.projects[

@@ -1,14 +1,15 @@
 'use client'
 import { useLayout } from '@/contexts/layout-context'
+import { getIconByName } from '@/lib/icon-map'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter } from 'lucide-react'
+import {} from 'lucide-react'
 
 interface FooterProps {
     themeVariant?: string
 }
 
 const Footer = ({ themeVariant = 'default' }: FooterProps) => {
-    const { siteConfig } = useLayout()
+    const { siteConfig, siteData } = useLayout()
     const currentYear = new Date().getFullYear()
 
     const { copyrightText, footerText } = siteConfig?.config ?? {}
@@ -46,33 +47,18 @@ const Footer = ({ themeVariant = 'default' }: FooterProps) => {
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="flex space-x-4"
                     >
-                        <a
-                            href="https://github.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full hover:bg-muted transition-colors"
-                            aria-label="GitHub"
-                        >
-                            <Github size={18} />
-                        </a>
-                        <a
-                            href="https://linkedin.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full hover:bg-muted transition-colors"
-                            aria-label="LinkedIn"
-                        >
-                            <Linkedin size={18} />
-                        </a>
-                        <a
-                            href="https://twitter.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full hover:bg-muted transition-colors"
-                            aria-label="Twitter"
-                        >
-                            <Twitter size={18} />
-                        </a>
+                        {siteData?.contact?.socials.map((social: any) => (
+                            <a
+                                key={social?.platform}
+                                href={social?.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 rounded-full bg-card flex items-center justify-center hover:bg-primary/10 transition-colors"
+                                aria-label={social?.platform}
+                            >
+                                {getIconByName(social.icon, 18)}
+                            </a>
+                        ))}
                     </motion.div>
                 </div>
             </div>
