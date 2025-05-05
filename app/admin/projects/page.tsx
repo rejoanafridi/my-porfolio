@@ -34,6 +34,7 @@ import {
 import { iconMap } from '@/lib/icon-map'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import { Switch } from '@/components/ui/switch'
+import { ImageUploader } from '@/components/admin/image-uploader'
 
 const IconOptions = memo(() => (
     <>
@@ -127,153 +128,178 @@ const ProjectCard = memo(
             value: string
         ) => void
         dragHandleProps: any
-    }) => (
-        <Card className="border-2">
-            <CardHeader className="pb-2">
-                <div className="flex items-center justify-between">
-                    <div {...dragHandleProps} className="cursor-grab">
-                        <GripVertical
-                            size={20}
-                            className="text-muted-foreground"
-                        />
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center space-x-2">
-                            <Switch
-                                id={`featured-${index}`}
-                                checked={project.featured}
-                                onCheckedChange={(checked) =>
-                                    onChange(index, 'featured', checked)
-                                }
+    }) => {
+        const handleImageChange =
+            (index: number, field: string) => (url: string) => {
+                console.log(index, { [field]: url })
+                onChange(index, field, url)
+            }
+        return (
+            <Card className="border-2">
+                <CardHeader className="pb-2">
+                    <div className="flex items-center justify-between">
+                        <div {...dragHandleProps} className="cursor-grab">
+                            <GripVertical
+                                size={20}
+                                className="text-muted-foreground"
                             />
-                            <Label htmlFor={`featured-${index}`}>
-                                Featured
-                            </Label>
                         </div>
-                        <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => onRemove(index)}
-                        >
-                            <Trash2 size={16} className="mr-2" />
-                            Remove
-                        </Button>
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center space-x-2">
+                                <Switch
+                                    id={`featured-${index}`}
+                                    checked={project.featured}
+                                    onCheckedChange={(checked) =>
+                                        onChange(index, 'featured', checked)
+                                    }
+                                />
+                                <Label htmlFor={`featured-${index}`}>
+                                    Featured
+                                </Label>
+                            </div>
+                            <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={() => onRemove(index)}
+                            >
+                                <Trash2 size={16} className="mr-2" />
+                                Remove
+                            </Button>
+                        </div>
                     </div>
-                </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                        <Label htmlFor={`title-${index}`}>Project Title</Label>
-                        <Input
-                            id={`title-${index}`}
-                            value={project.title}
-                            onChange={(e) =>
-                                onChange(index, 'title', e.target.value)
-                            }
-                            placeholder="Project title"
-                        />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label htmlFor={`image-${index}`}>Image URL</Label>
-                        <Input
-                            id={`image-${index}`}
-                            value={project.image}
-                            onChange={(e) =>
-                                onChange(index, 'image', e.target.value)
-                            }
-                            placeholder="Image URL"
-                        />
-                    </div>
-                </div>
-
-                <div className="space-y-2">
-                    <Label htmlFor={`description-${index}`}>Description</Label>
-                    <Textarea
-                        id={`description-${index}`}
-                        value={project.description}
-                        onChange={(e) =>
-                            onChange(index, 'description', e.target.value)
-                        }
-                        placeholder="Project description"
-                        rows={3}
-                    />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                        <Label htmlFor={`demoLink-${index}`}>Demo Link</Label>
-                        <Input
-                            id={`demoLink-${index}`}
-                            value={project.demoLink}
-                            onChange={(e) =>
-                                onChange(index, 'demoLink', e.target.value)
-                            }
-                            placeholder="https://example.com"
-                        />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label htmlFor={`githubLink-${index}`}>
-                            GitHub Link
-                        </Label>
-                        <Input
-                            id={`githubLink-${index}`}
-                            value={project.githubLink}
-                            onChange={(e) =>
-                                onChange(index, 'githubLink', e.target.value)
-                            }
-                            placeholder="https://github.com/username/repo"
-                        />
-                    </div>
-                </div>
-
-                <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                        <Label>Tech Stack</Label>
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() =>
-                                onChange(index, 'techStack', [
-                                    ...project.techStack,
-                                    { name: '', icon: 'Code' }
-                                ])
-                            }
-                        >
-                            <PlusCircle size={16} className="mr-1" />
-                            Add Technology
-                        </Button>
-                    </div>
-
-                    <div className="space-y-2">
-                        {project.techStack.map((tech, techIndex) => (
-                            <TechStackItem
-                                key={techIndex}
-                                tech={tech}
-                                index={techIndex}
-                                projectIndex={index}
-                                onChange={onTechStackChange}
-                                onRemove={(pIndex, tIndex) => {
-                                    const updatedTechStack = [
-                                        ...project.techStack
-                                    ]
-                                    updatedTechStack.splice(tIndex, 1)
-                                    onChange(
-                                        pIndex,
-                                        'techStack',
-                                        updatedTechStack
-                                    )
-                                }}
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <Label htmlFor={`title-${index}`}>
+                                Project Title
+                            </Label>
+                            <Input
+                                id={`title-${index}`}
+                                value={project.title}
+                                onChange={(e) =>
+                                    onChange(index, 'title', e.target.value)
+                                }
+                                placeholder="Project title"
                             />
-                        ))}
+                        </div>
+
+                        {/* <div className="space-y-2">
+                            <Label htmlFor={`image-${index}`}>Image URL</Label>
+                            <Input
+                                id={`image-${index}`}
+                                value={project.image}
+                                onChange={(e) =>
+                                    onChange(index, 'image', e.target.value)
+                                }
+                                placeholder="Image URL"
+                            />
+                        </div> */}
                     </div>
-                </div>
-            </CardContent>
-        </Card>
-    )
+                    <div className="space-y-2">
+                        <ImageUploader
+                            id={`image-${index}`}
+                            label="Logo"
+                            value={project.image}
+                            onChange={handleImageChange(index, 'image')}
+                            folder="project-image"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor={`description-${index}`}>
+                            Description
+                        </Label>
+                        <Textarea
+                            id={`description-${index}`}
+                            value={project.description}
+                            onChange={(e) =>
+                                onChange(index, 'description', e.target.value)
+                            }
+                            placeholder="Project description"
+                            rows={3}
+                        />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <Label htmlFor={`demoLink-${index}`}>
+                                Demo Link
+                            </Label>
+                            <Input
+                                id={`demoLink-${index}`}
+                                value={project.demoLink}
+                                onChange={(e) =>
+                                    onChange(index, 'demoLink', e.target.value)
+                                }
+                                placeholder="https://example.com"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor={`githubLink-${index}`}>
+                                GitHub Link
+                            </Label>
+                            <Input
+                                id={`githubLink-${index}`}
+                                value={project.githubLink}
+                                onChange={(e) =>
+                                    onChange(
+                                        index,
+                                        'githubLink',
+                                        e.target.value
+                                    )
+                                }
+                                placeholder="https://github.com/username/repo"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                            <Label>Tech Stack</Label>
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={() =>
+                                    onChange(index, 'techStack', [
+                                        ...project.techStack,
+                                        { name: '', icon: 'Code' }
+                                    ])
+                                }
+                            >
+                                <PlusCircle size={16} className="mr-1" />
+                                Add Technology
+                            </Button>
+                        </div>
+
+                        <div className="space-y-2">
+                            {project.techStack.map((tech, techIndex) => (
+                                <TechStackItem
+                                    key={techIndex}
+                                    tech={tech}
+                                    index={techIndex}
+                                    projectIndex={index}
+                                    onChange={onTechStackChange}
+                                    onRemove={(pIndex, tIndex) => {
+                                        const updatedTechStack = [
+                                            ...project.techStack
+                                        ]
+                                        updatedTechStack.splice(tIndex, 1)
+                                        onChange(
+                                            pIndex,
+                                            'techStack',
+                                            updatedTechStack
+                                        )
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+        )
+    }
 )
 
 ProjectCard.displayName = 'ProjectCard'
@@ -516,35 +542,41 @@ export default function ProjectsPage() {
                                 ref={provided.innerRef}
                                 className="space-y-8"
                             >
-                                {projectsData.projects.map((project, index) => (
-                                    <Draggable
-                                        key={project.id}
-                                        draggableId={project.id}
-                                        index={index}
-                                    >
-                                        {(provided) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                            >
-                                                <ProjectCard
-                                                    project={project}
-                                                    index={index}
-                                                    onChange={
-                                                        handleProjectChange
-                                                    }
-                                                    onRemove={removeProject}
-                                                    onTechStackChange={
-                                                        handleTechStackChange
-                                                    }
-                                                    dragHandleProps={
-                                                        provided.dragHandleProps
-                                                    }
-                                                />
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))}
+                                {projectsData.projects
+                                    .sort(
+                                        (a, b) =>
+                                            (a.display_order || 0) -
+                                            (b.display_order || 0)
+                                    )
+                                    .map((project, index) => (
+                                        <Draggable
+                                            key={project.id}
+                                            draggableId={project.id}
+                                            index={index}
+                                        >
+                                            {(provided) => (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                >
+                                                    <ProjectCard
+                                                        project={project}
+                                                        index={index}
+                                                        onChange={
+                                                            handleProjectChange
+                                                        }
+                                                        onRemove={removeProject}
+                                                        onTechStackChange={
+                                                            handleTechStackChange
+                                                        }
+                                                        dragHandleProps={
+                                                            provided.dragHandleProps
+                                                        }
+                                                    />
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    ))}
                                 {provided.placeholder}
                             </div>
                         )}

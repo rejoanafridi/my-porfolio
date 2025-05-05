@@ -158,21 +158,24 @@ async function getSiteData(): Promise<SiteConfig> {
                     id: project_section[0].id,
                     title: project_section[0].title,
                     subtitle: project_section[0].subtitle,
-                    projects: projects.map((p: any) => ({
-                        id: p.id,
-                        title: p.title,
-                        description: p.description,
-                        image: p.image,
-                        techStack: project_tech_stack
-                            .filter((pts: any) => pts.project_id === p.id)
-                            .map((pts: any) => ({
-                                icon: pts.icon,
-                                name: pts.name
-                            })),
-                        demoLink: p.demoLink,
-                        githubLink: p.github_link,
-                        featured: p.featured
-                    }))
+                    projects: projects
+                        .sort((a, b) => a.display_order - b.display_order)
+                        .map((p: any) => ({
+                            id: p.id,
+                            title: p.title,
+                            description: p.description,
+                            image: p.image,
+                            techStack: project_tech_stack
+                                .filter((pts: any) => pts.project_id === p.id)
+                                .map((pts: any) => ({
+                                    icon: pts.icon,
+                                    name: pts.name
+                                })),
+                            demoLink: p.demo_link,
+                            githubLink: p.github_link,
+                            featured: p.featured,
+                            display_order: p.display_order
+                        }))
                 },
                 contact: {
                     id: contact[0].id,

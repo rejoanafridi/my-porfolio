@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -37,7 +37,11 @@ export function ImageUploader({
         },
         []
     )
-
+    useEffect(() => {
+        if (isUploading) {
+            setIsUploading(isUploading)
+        }
+    }, [isUploading])
     const handleUpload = useCallback(async () => {
         if (!file) {
             setUploadError('Please select a file to upload')

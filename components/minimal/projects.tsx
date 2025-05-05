@@ -123,7 +123,7 @@ const MinimalProjects = ({ data }: MinimalProjectsProps) => {
                                         asChild
                                     >
                                         <a
-                                            href={project.demoLink}
+                                            href={project?.demoLink}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-2"
